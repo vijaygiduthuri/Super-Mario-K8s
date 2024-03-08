@@ -1,25 +1,16 @@
 #!/bin/bash
-
-# Update package index
-sudo apt update
-
-# Install Java
-sudo apt install -y default-jre
-
-# Add Jenkins repository key
-wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
-
-# Add Jenkins repository to the system
-sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
-
-# Update package index again to include Jenkins repository
-sudo apt update
-
-# Install Jenkins
-sudo apt install -y jenkins
-
-# Start Jenkins service
+sudo su
+sudo apt update -y
+wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | tee /etc/apt/keyrings/adoptium.asc
+echo "deb [signed-by=/etc/apt/keyrings/adoptium.asc] https://packages.adoptium.net/artifactory/deb $(awk -F= '/^VERSION_CODENAME/{print$2}' /etc/os-release) main" | tee /etc/apt/sources.list.d/adoptium.list
+sudo apt update -y
+sudo apt install temurin-17-jdk -y
+/usr/bin/java --version
+curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee \
+                  /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+                  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+                              /etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt-get update -y
+sudo apt-get install jenkins -y
 sudo systemctl start jenkins
-
-# Enable Jenkins service to start on boot
-sudo systemctl enable jenkins
