@@ -24,7 +24,7 @@ sudo su
     ```
     
 # **Step 3: Install Jenkins on EC2-Instance using shell script:**
-- vi script1.sh
+- vi jenkins.sh
   
 ```
 #!/bin/bash
@@ -44,7 +44,7 @@ sudo apt-get update -y
 sudo apt-get install jenkins -y
 sudo systemctl start jenkins
 ```
-- sudo chmod 777 script1.sh
-- sh script.sh
+- sudo chmod 777 jenkins.sh
+- sh jenkins.sh
 
   
