@@ -4,8 +4,8 @@
 
 # Step 1: **Launch EC2 (Ubuntu):**
 
-- Provision an EC2 instance on AWS with Ubuntu AMI and Instance type t2.medium & with 15GB storage.
-- create IAM Role with Administrator permissions and Attach to EC2-Instance
+- Provision an EC2 instance on AWS with Ubuntu AMI and `Instance type t2.medium & with 15GB storage`
+- create IAM Role with `Administrator permissions` and Attach to EC2-Instance
 - Connect to the instance using SSH.
 
 # **Step 2: Clone the Code:**
